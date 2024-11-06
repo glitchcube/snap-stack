@@ -1,0 +1,16 @@
+{
+  "name": "SnapStack",
+  "short_name": "SnapStack",
+  "description": "SnapStack is a photo collage maker that organizes images by date and allows you to download high-quality collages.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "snap-stack.jpg",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ]
+}
