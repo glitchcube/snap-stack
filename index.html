@@ -4,27 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SnapStack</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="snap-stack.jpg" type="image/webp">
     <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="snap-stack.jpg" type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <h1>SnapStack</h1>
-<input type="file" id="imageUpload" multiple accept="image/*">
-<button onclick="createCollage()">Create Collage</button>
+<label class="upload-label" for="imageUpload">Select Photos</label>
+<input type="file" id="imageUpload" multiple accept="image/*" style="display: none;">
 <div class="canvas-container">
     <canvas id="collageCanvas"></canvas>
 </div>
-<button onclick="downloadCollage()">Download Collage</button>
+<button id="downloadButton" onclick="downloadCollage()">Download Collage</button>
 
 <script src="app.js"></script>
 <script>
-    if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-            .register("/service-worker.js")
-            .then(() => console.log("Service Worker registered"))
-            .catch((error) => console.log("Service Worker registration failed:", error));
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+            console.log("Service Worker registered with scope:", registration.scope);
+        }).catch((error) => {
+            console.error("Service Worker registration failed:", error);
+        });
     }
 </script>
+
 </body>
 </html>

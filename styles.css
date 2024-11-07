@@ -1,34 +1,75 @@
+/* Reset and global styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0;
+    background-color: #f7f7f7;
     padding: 20px;
-    box-sizing: border-box;
+    color: #333;
 }
 
 h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #4A90E2;
     text-align: center;
 }
 
-input, button {
-    margin: 10px;
+.upload-label {
+    display: inline-block;
+    background-color: #4A90E2;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.upload-label:hover {
+    background-color: #357ABD;
 }
 
 .canvas-container {
     width: 100%;
-    overflow-x: auto; /* Enable horizontal scroll if needed */
+    max-width: 90%;
+    overflow-x: auto;
     display: flex;
-    justify-content: center; /* Center canvas horizontally */
+    justify-content: center;
+    margin-top: 20px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 10px;
 }
 
 canvas {
-    width: 90%; /* Set canvas width to 90% of container for responsiveness */
-    max-width: 500px; /* Limit max width on larger screens */
-    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 8px;
+}
+
+button {
+    background-color: #4A90E2;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     margin-top: 20px;
-    background-color: white; /* Set white background for PNG visibility on iOS */
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #357ABD;
 }

@@ -3,13 +3,14 @@ const ctx = canvas.getContext('2d');
 let imagesByDate = {};
 let selectedFiles = [];
 
-// Handle image upload and store selected files
+// Automatically create collage after selecting images
 document.getElementById('imageUpload').addEventListener('change', (event) => {
     selectedFiles = Array.from(event.target.files);
-    imagesByDate = {}; // Reset imagesByDate for each new selection
+    imagesByDate = {};
+    createCollage(); // Automatically start collage creation
 });
 
-// Create collage after "Create Collage" button is clicked
+// Create the collage
 function createCollage() {
     const loadImagePromises = selectedFiles.map((file) =>
         new Promise((resolve) => {
@@ -33,7 +34,7 @@ function createCollage() {
     Promise.all(loadImagePromises).then(() => drawCollage());
 }
 
-// Format date to "Weekday (DD.MM.YYYY)"
+// Format the date for display
 function formatDateString(dateString) {
     const [year, month, day] = dateString.split(":");
     const date = new Date(year, month - 1, day);
@@ -44,37 +45,28 @@ function formatDateString(dateString) {
 
 // Draw the collage on the canvas
 function drawCollage() {
-    const containerWidth = document.querySelector('.canvas-container').clientWidth;
-    const imgWidth = 200; // Fixed width for layout alignment (adjust as needed)
-    const rowPadding = 20; // Spacing between each date section
-    const dateLabelHeight = 40; // Space for date label text
+    const imgWidth = 200;
+    const rowPadding = 20;
+    const dateLabelHeight = 40;
     let collageWidth = 0;
     let collageHeight = 0;
 
-    // Sort dates in descending order
     const sortedDates = Object.entries(imagesByDate).sort((a, b) => b[1].date - a[1].date);
-
-    // Calculate collage height and width
     sortedDates.forEach(([formattedDate, data]) => {
         const rows = Math.ceil(data.images.length / 5);
         collageHeight += rows * imgWidth + rowPadding + dateLabelHeight;
         collageWidth = Math.max(collageWidth, data.images.length * imgWidth);
     });
 
-    // Set canvas dimensions to fit all images
     canvas.width = collageWidth;
     canvas.height = collageHeight;
-
-    // Fill the background with white for PNG visibility on iOS
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     let yOffset = 0;
-
-    // Draw images by date
     sortedDates.forEach(([formattedDate, data]) => {
         ctx.fillStyle = 'black';
-        ctx.font = "20px Arial";
+        ctx.font = "20px Roboto";
         ctx.fillText(formattedDate, 10, yOffset + dateLabelHeight / 2);
         yOffset += dateLabelHeight;
 
@@ -82,14 +74,14 @@ function drawCollage() {
         rowImages.forEach((imageData, i) => {
             const x = (i % 5) * imgWidth;
             const y = yOffset + Math.floor(i / 5) * imgWidth;
-            ctx.drawImage(imageData.img, x, y, imgWidth, imgWidth); // Draw image in original dimensions
+            ctx.drawImage(imageData.img, x, y, imgWidth, imgWidth);
         });
 
         yOffset += Math.ceil(rowImages.length / 5) * imgWidth + rowPadding;
     });
 }
 
-// Download Collage
+// Download the collage
 function downloadCollage() {
     const link = document.createElement('a');
     link.href = canvas.toDataURL('image/png');

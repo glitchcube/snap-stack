@@ -5,12 +5,12 @@
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "theme_color": "#4A90E2",
   "icons": [
     {
       "src": "snap-stack.jpg",
       "sizes": "512x512",
-      "type": "image/webp"
+      "type": "image/jpeg"
     }
   ]
 }
